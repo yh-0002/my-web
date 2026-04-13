@@ -23,19 +23,22 @@
 
   <!-- Step 2 -->
   <div class="card hidden" id="step2">
-    <h2>Step 2：填寫資料</h2>
-    <input type="text" id="name" placeholder="您的姓名">
-    <input type="tel" id="phone" placeholder="電話">
-    <input type="date" id="date">
+  <h2>Step 2：填寫資料</h2>
 
-    <select id="people">
-      <option value="">用餐人數</option>
-      <option>1 人</option>
-      <option>2 人</option>
-      <option>3 人</option>
-      <option>4 人</option>
-    </select>
-  </div>
+  <input type="text" id="name" placeholder="您的姓名">
+  <input type="tel" id="phone" placeholder="電話">
+  <input type="date" id="date">
+
+  <select id="people">
+    <option value="">用餐人數</option>
+    <option>1 人</option>
+    <option>2 人</option>
+    <option>3 人</option>
+    <option>4 人</option>
+  </select>
+
+  <button type="button" onclick="goToStep3()">下一步：選時段</button>
+</div>
 
   <!-- Step 3 -->
   <div class="card hidden" id="step3">
