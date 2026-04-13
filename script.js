@@ -40,10 +40,19 @@ function validateForm(name, phone, date, people) {
     return false;
   }
 
+function cleanPhone(phone) {
+  return phone.replace(/[^0-9]/g, '');
+}
+
+function validatePhone(phone) {
+  phone = cleanPhone(phone);
+
   if (!/^09\d{8}$/.test(phone)) {
-    alert("電話格式錯誤");
     return false;
   }
+
+  return phone; // 回傳乾淨電話
+}
 
   if (!date || !people) {
     alert("請填完整資料");
