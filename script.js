@@ -40,7 +40,7 @@ function validateForm(name, phone, date, people) {
     return false;
   }
 
-  if (!/^09\\d{8}$/.test(phone)) {
+  if (!/^09\d{8}$/.test(phone)) {
     alert("電話格式錯誤");
     return false;
   }
