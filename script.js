@@ -2,7 +2,7 @@
 let selectedService = "";
 let selectedTime = "";
 
-/* ========== 初始化 ========== */
+/* ========== 日期限制 ========== */
 const dateInput = document.getElementById("date");
 const today = new Date().toISOString().split("T")[0];
 dateInput.min = today;
@@ -12,6 +12,18 @@ function showStep(id) {
   const el = document.getElementById(id);
   el.classList.remove("hidden");
   el.scrollIntoView({ behavior: "smooth" });
+}
+
+/* ========== Step 2 → Step 3（安全版） ========== */
+function goToStep3() {
+  const date = document.getElementById("date").value;
+
+  if (!date) {
+    alert("請先選擇預約日期");
+    return;
+  }
+
+  showStep("step3");
 }
 
 /* ========== 選服務 ========== */
@@ -24,12 +36,6 @@ function selectService(el) {
   showStep("step2");
 }
 
-/* ========== 選日期（關鍵修正） ========== */
-dateInput.addEventListener("change", () => {
-  if (!dateInput.value) return;
-  showStep("step3");
-});
-
 /* ========== 選時間 ========== */
 function selectTime(el) {
   document.querySelectorAll('.time').forEach(t => t.classList.remove('active'));
@@ -38,7 +44,7 @@ function selectTime(el) {
   selectedTime = el.innerText;
 }
 
-/* ========== 工具函式 ========== */
+/* ========== 電話工具 ========== */
 function cleanPhone(phone) {
   return phone.replace(/[^0-9]/g, '').trim();
 }
