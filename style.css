@@ -1,3 +1,4 @@
+
 /* ========== 全域 ========== */
 body {
   margin: 0;
@@ -39,36 +40,44 @@ h2 {
   color: #333;
 }
 
-/* ========== 表單修正重點（已對齊） ========== */
+/* ========== 表單（完全修正對齊版） ========== */
 input,
 select {
   width: 100%;
-  display: block;
   box-sizing: border-box;
 
-  height: 44px;          /* ⭐ 關鍵：統一高度 */
-  padding: 0 12px;       /* ⭐ 上下改為 0，避免漂 */
+  height: 46px;              /* ⭐ 統一高度 */
+  padding: 0 12px;           /* ⭐ 左右 padding */
   margin: 10px 0;
 
   border-radius: 12px;
   border: 1px solid #e5e7eb;
+
   font-size: 15px;
   background: #f9fafb;
 
-  line-height: 44px;     /* ⭐ 文字垂直置中 */
+  line-height: 46px;         /* ⭐ 文字垂直置中 */
 }
 
-/* placeholder 更淡 */
-input::placeholder {
-  color: #9ca3af;
+/* 移除瀏覽器原生差異 */
+input,
+select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* date 微調（最容易歪的） */
+input[type="date"] {
+  line-height: normal;
+  padding-right: 10px;
 }
 
 /* focus */
 input:focus,
 select:focus {
+  outline: none;
   border-color: #007BFF;
   background: white;
-  outline: none;
   box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
 }
 
@@ -84,13 +93,13 @@ select:focus {
   font-weight: 500;
 }
 
-/* hover（更穩） */
+/* hover */
 .service:hover, .time:hover {
   transform: translateY(-2px);
   background: #e9ecef;
 }
 
-/* 選中狀態 */
+/* 選中 */
 .service.active {
   background: linear-gradient(135deg, #007BFF, #4aa3ff);
   color: white;
