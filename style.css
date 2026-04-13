@@ -40,36 +40,24 @@ h2 {
   color: #333;
 }
 
-/* ========== 表單（完全修正對齊版） ========== */
+/* ========== INPUT SYSTEM（唯一標準） ========== */
 input,
 select {
   width: 100%;
   box-sizing: border-box;
 
-  height: 46px;              /* ⭐ 統一高度 */
-  padding: 0 12px;           /* ⭐ 左右 padding */
+  height: 48px;
+  padding: 0 12px;
   margin: 10px 0;
 
   border-radius: 12px;
   border: 1px solid #e5e7eb;
 
-  font-size: 15px;
+  font-size: 16px;
   background: #f9fafb;
 
-  line-height: 46px;         /* ⭐ 文字垂直置中 */
-}
-
-/* 移除瀏覽器原生差異 */
-input,
-select {
   -webkit-appearance: none;
   appearance: none;
-}
-
-/* date 微調（最容易歪的） */
-input[type="date"] {
-  line-height: normal;
-  padding-right: 10px;
 }
 
 /* focus */
@@ -79,6 +67,11 @@ select:focus {
   border-color: #007BFF;
   background: white;
   box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+}
+
+/* date 修正 */
+input[type="date"] {
+  padding-right: 10px;
 }
 
 /* ========== 服務 & 時段 ========== */
@@ -93,13 +86,11 @@ select:focus {
   font-weight: 500;
 }
 
-/* hover */
 .service:hover, .time:hover {
   transform: translateY(-2px);
   background: #e9ecef;
 }
 
-/* 選中 */
 .service.active {
   background: linear-gradient(135deg, #007BFF, #4aa3ff);
   color: white;
@@ -134,7 +125,6 @@ button:hover {
 button:disabled {
   background: #b5b5b5;
   cursor: not-allowed;
-  box-shadow: none;
 }
 
 /* 隱藏 */
@@ -149,43 +139,7 @@ button:disabled {
   animation: fadeIn 0.4s ease;
 }
 
-/* 動畫 */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ========== 手機專用修正 ========== */
-@media (max-width: 768px) {
-
-  input,
-  select {
-    height: 48px;          /* ⭐ 手機稍微加高 */
-    font-size: 16px;       /* ⭐ 防 iOS zoom */
-    line-height: normal;   /* ⭐ 取消 line-height 干擾 */
-    padding: 0 12px;
-  }
-
-  input[type="date"] {
-    height: 48px;
-  }
-
-  .card {
-    padding: 16px;
-  }
-
-  button {
-    font-size: 16px;
-  }
-}
-
-input, select {
-  -webkit-text-size-adjust: 100%;
-  -webkit-appearance: none;
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
