@@ -33,6 +33,15 @@ function selectTime(el) {
   selectedTime = el.innerText;
 }
 
+// ✅ 電話工具（要放外面）
+function cleanPhone(phone) {
+  return phone.replace(/[^0-9]/g, '').trim();
+}
+
+function validatePhone(phone) {
+  return /^09\d{8}$/.test(phone);
+}
+
 // 驗證
 function validateForm(name, phone, date, people) {
   if (name.length < 2) {
@@ -40,14 +49,10 @@ function validateForm(name, phone, date, people) {
     return false;
   }
 
-function cleanPhone(phone) {
-  return phone.replace(/[^0-9]/g, '').trim();
-}
-
-function validatePhone(phone) {
-  const cleaned = cleanPhone(phone);
-  return /^09\d{8}$/.test(cleaned);
-}
+  if (!validatePhone(phone)) {
+    alert("電話格式錯誤");
+    return false;
+  }
 
   if (!date || !people) {
     alert("請填完整資料");
@@ -68,13 +73,9 @@ function submitBooking() {
   console.log("原始電話:", rawPhone);
   console.log("清洗後:", phone);
 
-  if (!validatePhone(phone)) {
-    alert("電話格式錯誤（需為09開頭10碼）");
+  if (!selectedService || !selectedTime || !validateForm(name, phone, date, people)) {
     return;
   }
-
-  alert("電話正確：" + phone);
-}
 
   const btn = document.querySelector("button");
   btn.innerText = "預約中...";
