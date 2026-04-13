@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart-Reserve 智慧預約</title>
 
-  <!-- 引入 CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,26 +22,27 @@
 
   <!-- Step 2 -->
   <div class="card hidden" id="step2">
-  <h2>Step 2：填寫資料</h2>
+    <h2>Step 2：填寫資料</h2>
 
-  <input type="text" id="name" placeholder="您的姓名">
-  <input type="tel" id="phone" placeholder="電話">
-  <input type="date" id="date">
+    <input type="text" id="name" placeholder="您的姓名">
+    <input type="tel" id="phone" placeholder="電話">
+    <input type="date" id="date">
 
-  <select id="people">
-    <option value="">用餐人數</option>
-    <option>1 人</option>
-    <option>2 人</option>
-    <option>3 人</option>
-    <option>4 人</option>
-  </select>
+    <select id="people">
+      <option value="">用餐人數</option>
+      <option>1 人</option>
+      <option>2 人</option>
+      <option>3 人</option>
+      <option>4 人</option>
+    </select>
 
-  <button type="button" onclick="goToStep3()">下一步：選時段</button>
-</div>
+    <button type="button" onclick="goToStep3()">下一步：選時段</button>
+  </div>
 
   <!-- Step 3 -->
   <div class="card hidden" id="step3">
     <h2>Step 3：選擇時段</h2>
+
     <div class="time-slot">
       <div class="time" onclick="selectTime(this)">11:00</div>
       <div class="time" onclick="selectTime(this)">12:00</div>
@@ -60,14 +60,8 @@
 
   <button onclick="submitBooking()">確認訂位</button>
 
-  <div class="card success hidden" id="success">
-    <h2>🎉 訂位成功</h2>
-    <p id="result"></p>
-  </div>
-
 </div>
 
-<!-- 引入 JS（放最後） -->
 <script src="script.js"></script>
 
 </body>
