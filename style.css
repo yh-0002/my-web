@@ -1,11 +1,12 @@
-/* 全域 */
+/* ========== 全域 ========== */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   background: linear-gradient(135deg, #eef2f7, #f8fafc);
+  color: #222;
 }
 
-/* Header */
+/* ========== Header ========== */
 header {
   background: linear-gradient(135deg, #007BFF, #0056d2);
   color: white;
@@ -16,25 +17,28 @@ header {
   letter-spacing: 1px;
 }
 
-/* 容器 */
+/* ========== 容器 ========== */
 .container {
   padding: 16px;
-  max-width: 500px;
+  max-width: 520px;
   margin: auto;
 }
 
-/* 卡片 */
+/* ========== 卡片 ========== */
 .card {
   background: white;
   border-radius: 16px;
   padding: 18px;
   margin-bottom: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  transition: 0.3s;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  transition: 0.25s ease;
 }
 
-.card:hover {
-  transform: translateY(-2px);
+/* 桌機 hover 才啟用 */
+@media (min-width: 768px) {
+  .card:hover {
+    transform: translateY(-2px);
+  }
 }
 
 /* 標題 */
@@ -44,91 +48,97 @@ h2 {
   color: #333;
 }
 
-/* 服務 / 時間 */
+/* ========== 選項（服務 / 時段） ========== */
 .service, .time {
   padding: 14px;
   margin: 8px 0;
-  background: #f1f3f5;
-  border-radius: 10px;
+  background: #f3f4f6;
+  border-radius: 12px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: 0.2s ease;
   font-weight: 500;
 }
 
-/* Hover 效果 */
+/* hover 改為位移（更穩） */
 .service:hover, .time:hover {
-  transform: scale(1.05);
-  background: #e2e6ea;
+  transform: translateY(-2px);
+  background: #e9ecef;
 }
 
-/* 選中狀態 */
+/* 選中狀態（升級感） */
 .service.active {
-  background: linear-gradient(135deg, #007BFF, #339dff);
+  background: linear-gradient(135deg, #007BFF, #4aa3ff);
   color: white;
+  box-shadow: 0 6px 14px rgba(0,123,255,0.25);
+  transform: translateY(-1px);
 }
 
 .time.active {
   background: linear-gradient(135deg, #28a745, #48d368);
   color: white;
+  box-shadow: 0 6px 14px rgba(40,167,69,0.25);
+  transform: translateY(-1px);
 }
 
-/* 表單 */
+/* ========== 表單 ========== */
 input, select {
   width: 100%;
   padding: 12px;
   margin-top: 8px;
   margin-bottom: 16px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
   font-size: 15px;
-  transition: 0.2s;
+  background: #f9fafb;
+  transition: 0.2s ease;
 }
 
-/* focus 效果（很重要） */
+/* focus（更 App 感） */
 input:focus, select:focus {
   border-color: #007BFF;
+  background: white;
   outline: none;
   box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
 }
 
-/* 按鈕 */
+/* ========== 按鈕 ========== */
 button {
   width: 100%;
   padding: 15px;
   background: linear-gradient(135deg, #28a745, #3ddc84);
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.25s ease;
 }
 
-/* 按鈕 hover */
+/* hover（更輕） */
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(40,167,69,0.3);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
 
 /* disabled */
 button:disabled {
-  background: #aaa;
+  background: #b5b5b5;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* 隱藏 */
+/* ========== 隱藏 ========== */
 .hidden {
   display: none;
 }
 
-/* 成功畫面 */
+/* ========== 成功畫面 ========== */
 .success {
   text-align: center;
   padding: 40px;
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.4s ease;
 }
 
 /* 動畫 */
