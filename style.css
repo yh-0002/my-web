@@ -160,3 +160,32 @@ button:disabled {
     transform: translateY(0);
   }
 }
+
+/* ========== 手機專用修正 ========== */
+@media (max-width: 768px) {
+
+  input,
+  select {
+    height: 48px;          /* ⭐ 手機稍微加高 */
+    font-size: 16px;       /* ⭐ 防 iOS zoom */
+    line-height: normal;   /* ⭐ 取消 line-height 干擾 */
+    padding: 0 12px;
+  }
+
+  input[type="date"] {
+    height: 48px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  button {
+    font-size: 16px;
+  }
+}
+
+input, select {
+  -webkit-text-size-adjust: 100%;
+  -webkit-appearance: none;
+}
