@@ -1,80 +1,144 @@
+/* 全域 */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f0f2f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #eef2f7, #f8fafc);
 }
 
+/* Header */
 header {
-  background: #007BFF;
+  background: linear-gradient(135deg, #007BFF, #0056d2);
   color: white;
-  padding: 16px;
+  padding: 18px;
   text-align: center;
   font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
+/* 容器 */
 .container {
   padding: 16px;
+  max-width: 500px;
+  margin: auto;
 }
 
+/* 卡片 */
 .card {
   background: white;
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 16px;
+  padding: 18px;
   margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: 0.3s;
 }
 
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* 標題 */
+h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+/* 服務 / 時間 */
 .service, .time {
-  padding: 12px;
+  padding: 14px;
   margin: 8px 0;
-  background: #f5f5f5;
-  border-radius: 8px;
+  background: #f1f3f5;
+  border-radius: 10px;
   text-align: center;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.25s ease;
+  font-weight: 500;
 }
 
+/* Hover 效果 */
 .service:hover, .time:hover {
   transform: scale(1.05);
+  background: #e2e6ea;
 }
 
+/* 選中狀態 */
 .service.active {
-  background: #007BFF;
+  background: linear-gradient(135deg, #007BFF, #339dff);
   color: white;
 }
 
 .time.active {
-  background: #28a745;
+  background: linear-gradient(135deg, #28a745, #48d368);
   color: white;
 }
 
+/* 表單 */
 input, select {
   width: 100%;
   padding: 12px;
   margin-top: 8px;
   margin-bottom: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  transition: 0.2s;
 }
 
+/* focus 效果（很重要） */
+input:focus, select:focus {
+  border-color: #007BFF;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+}
+
+/* 按鈕 */
 button {
   width: 100%;
-  padding: 14px;
-  background: #28a745;
+  padding: 15px;
+  background: linear-gradient(135deg, #28a745, #3ddc84);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
+/* 按鈕 hover */
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(40,167,69,0.3);
+}
+
+/* disabled */
 button:disabled {
   background: #aaa;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
+/* 隱藏 */
 .hidden {
   display: none;
 }
 
+/* 成功畫面 */
 .success {
   text-align: center;
   padding: 40px;
+  animation: fadeIn 0.5s ease;
+}
+
+/* 動畫 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
