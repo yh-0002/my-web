@@ -2,7 +2,9 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>訂位成功</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -14,14 +16,33 @@
 
   <div class="card success">
     <h2>🎉 訂位成功</h2>
+    <p>我們已收到您的預約</p>
 
     <div id="result"></div>
 
-    <button onclick="goHome()">返回首頁</button>
+    <br>
+
+    <a href="index.html">
+      <button>返回首頁</button>
+    </a>
   </div>
 
 </div>
 
-<script src="script.js"></script>
+<script>
+  const data = JSON.parse(localStorage.getItem("booking"));
+
+  if (data) {
+    document.getElementById("result").innerHTML = `
+      姓名：${data.name}<br>
+      電話：${data.phone}<br>
+      服務：${data.service}<br>
+      人數：${data.people}<br>
+      日期：${data.date}<br>
+      時間：${data.time}
+    `;
+  }
+</script>
+
 </body>
 </html>
