@@ -9,7 +9,6 @@ header {
   color: white;
   padding: 16px;
   text-align: center;
-  font-weight: bold;
 }
 
 .container {
@@ -20,14 +19,10 @@ header {
 
 .card {
   background: white;
-  border-radius: 16px;
   padding: 18px;
   margin-bottom: 16px;
+  border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-}
-
-h2 {
-  margin-top: 0;
 }
 
 input, select {
@@ -35,9 +30,8 @@ input, select {
   height: 48px;
   margin: 10px 0;
   padding: 0 12px;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid #ddd;
-  font-size: 16px;
 }
 
 button {
@@ -46,14 +40,13 @@ button {
   background: #28a745;
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
+  border-radius: 10px;
 }
 
 .service, .time {
   padding: 12px;
-  background: #f1f3f5;
   margin: 8px 0;
+  background: #eee;
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
@@ -69,20 +62,12 @@ button {
   color: white;
 }
 
+.hidden {
+  display: none;
+}
+
 .time-slot {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-}
-
-.success {
-  text-align: center;
-}
-
-.info {
-  margin-top: 12px;
-  background: #f8f9fa;
-  padding: 12px;
-  border-radius: 10px;
-  line-height: 1.8;
 }
