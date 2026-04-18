@@ -24,18 +24,27 @@ header {
   margin: auto;
 }
 
-/* 卡片 */
+/* 卡片（🔥 已修電腦 hover bug） */
 .card {
   background: white;
   border-radius: 16px;
   padding: 18px;
   margin-bottom: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-  transition: all 0.25s ease;
+
+  transition: transform 0.25s ease;
+  transform: translateZ(0); /* 🔥 修電腦 click bug */
+  will-change: transform;
 }
 
 .card:hover {
   transform: translateY(-2px);
+}
+
+/* Step1 保護層級（🔥 點不到問題核心修正） */
+#step1 {
+  position: relative;
+  z-index: 10;
 }
 
 /* 標題 */
@@ -81,8 +90,11 @@ select:focus {
   border-radius: 12px;
   text-align: center;
   cursor: pointer;
-  transition: 0.2s ease;
   font-weight: 500;
+  transition: 0.2s ease;
+
+  position: relative;
+  z-index: 1;
 
   -webkit-tap-highlight-color: transparent;
 }
@@ -101,14 +113,14 @@ select:focus {
   box-shadow: 0 6px 14px rgba(0,123,255,0.25);
 }
 
-/* ========== Step 3 時段（重點修正） ========== */
+/* ========== Step 3 時段 ========== */
 .time-slot {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
-/* 統一大小（關鍵） */
+/* 統一尺寸（🔥 完全修復手機/電腦不一致） */
 .time {
   height: 52px;
 
@@ -118,6 +130,7 @@ select:focus {
 
   border-radius: 12px;
   background: #f3f4f6;
+
   font-size: 15px;
   font-weight: 500;
 
@@ -194,6 +207,7 @@ button:disabled {
   text-align: left;
 }
 
+/* 動畫 */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
