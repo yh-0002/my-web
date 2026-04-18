@@ -1,40 +1,39 @@
-
-let selectedService = "";
+let selectedService = localStorage.getItem("service") || "";
 let selectedTime = "";
 
-/* ========== 日期限制 ========== */
-const dateInput = document.getElementById("date");
-const today = new Date().toISOString().split("T")[0];
-dateInput.min = today;
-
-/* ========== Step 控制 ========== */
-function showStep(id) {
-  document.getElementById(id).classList.remove("hidden");
-}
-
-/* ========== Step2 → Step3（安全控制） ========== */
-function goToStep3() {
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value;
-  const date = document.getElementById("date").value;
-  const people = document.getElementById("people").value;
-
-  if (!name || !phone || !date || !people) {
-    alert("請完整填寫資料");
-    return;
-  }
-
-  showStep("step3");
-}
-
-/* ========== 選服務 ========== */
+/* ========== Step 1 → Step 2 ========== */
 function selectService(el) {
   document.querySelectorAll('.service').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
 
   selectedService = el.innerText;
+  localStorage.setItem("service", selectedService);
+}
 
-  showStep("step2");
+/* ========== 下一步（跳 Step 3 頁） ========== */
+function goToStep3() {
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const date = document.getElementById("date").value;
+  const people = document.getElementById("people").value;
+
+  if (!selectedService) return alert("請選服務");
+  if (!name || !phone || !date || !people) {
+    alert("請完整填寫資料");
+    return;
+  }
+
+  const bookingTemp = {
+    name,
+    phone,
+    date,
+    people,
+    service: selectedService
+  };
+
+  localStorage.setItem("bookingTemp", JSON.stringify(bookingTemp));
+
+  window.location.href = "step3.html";
 }
 
 /* ========== 選時段 ========== */
@@ -45,36 +44,17 @@ function selectTime(el) {
   selectedTime = el.innerText;
 }
 
-/* ========== 電話清理 ========== */
-function cleanPhone(phone) {
-  return phone.replace(/[^0-9]/g, '').trim();
-}
-
-function validatePhone(phone) {
-  return /^09\d{8}$/.test(phone);
-}
-
-/* ========== 提交（導向成功頁） ========== */
+/* ========== 提交 ========== */
 function submitBooking() {
-  let name = document.getElementById('name').value.trim();
-  let rawPhone = document.getElementById('phone').value;
-  let phone = cleanPhone(rawPhone);
-  let date = document.getElementById('date').value;
-  let people = document.getElementById('people').value;
+  const temp = JSON.parse(localStorage.getItem("bookingTemp"));
 
-  if (!selectedService) return alert("請選服務");
+  if (!temp) return alert("資料遺失，請重新填寫");
   if (!selectedTime) return alert("請選時段");
-  if (name.length < 2) return alert("姓名至少2字");
-  if (!validatePhone(phone)) return alert("電話格式錯誤");
-  if (!date || !people) return alert("請完整填寫資料");
 
   const bookingData = {
-    name,
-    phone,
-    service: selectedService,
-    people,
-    date,
-    time: selectedTime
+    ...temp,
+    time: selectedTime,
+    id: "SR" + Date.now()
   };
 
   localStorage.setItem("booking", JSON.stringify(bookingData));
