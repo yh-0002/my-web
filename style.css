@@ -1,10 +1,10 @@
+
 /* ========== 全域 ========== */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   background: linear-gradient(135deg, #eef2f7, #f8fafc);
   color: #222;
-  -webkit-text-size-adjust: 100%;
 }
 
 /* Header */
@@ -13,13 +13,13 @@ header {
   color: white;
   padding: 18px;
   text-align: center;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 /* 容器 */
 .container {
-  padding: 14px;
+  padding: 16px;
   max-width: 520px;
   margin: auto;
 }
@@ -27,42 +27,40 @@ header {
 /* 卡片 */
 .card {
   background: white;
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  transform: translateZ(0);
-  transition: 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
 
 /* 標題 */
 h2 {
   margin-top: 0;
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
 }
 
-/* ========== INPUT ========== */
+/* ========== INPUT SYSTEM（唯一標準） ========== */
 input,
 select {
   width: 100%;
   box-sizing: border-box;
 
-  height: 46px;
+  height: 48px;
   padding: 0 12px;
-  margin: 8px 0;
+  margin: 10px 0;
 
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid #e5e7eb;
 
-  font-size: 15px;
+  font-size: 16px;
   background: #f9fafb;
+
+  -webkit-appearance: none;
+  appearance: none;
 }
 
+/* focus */
 input:focus,
 select:focus {
   outline: none;
@@ -71,71 +69,34 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
 }
 
-/* ========== Step1 服務 ========== */
-.service {
+/* date 修正 */
+input[type="date"] {
+  padding-right: 10px;
+}
+
+/* ========== 服務 & 時段 ========== */
+.service, .time {
   padding: 14px;
   margin: 8px 0;
-
   background: #f3f4f6;
   border-radius: 12px;
-
   text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-
   cursor: pointer;
   transition: 0.2s ease;
+  font-weight: 500;
 }
 
-.service:hover {
+.service:hover, .time:hover {
+  transform: translateY(-2px);
   background: #e9ecef;
-}
-
-.service:active {
-  transform: scale(0.97);
 }
 
 .service.active {
   background: linear-gradient(135deg, #007BFF, #4aa3ff);
   color: white;
+  box-shadow: 0 6px 14px rgba(0,123,255,0.25);
 }
 
-/* ========== Step3（🔥 完全對齊 Step1） ========== */
-
-.time-slot {
-  display: block;
-  margin-top: 10px;
-}
-
-/* 🔥 跟 Step1 完全一致 */
-.time {
-  padding: 14px;
-  margin: 8px 0;
-
-  background: #f3f4f6;
-  border-radius: 12px;
-
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-
-  cursor: pointer;
-  transition: 0.2s ease;
-
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* hover */
-.time:hover {
-  background: #e9ecef;
-}
-
-/* click */
-.time:active {
-  transform: scale(0.97);
-}
-
-/* selected */
 .time.active {
   background: linear-gradient(135deg, #28a745, #48d368);
   color: white;
@@ -145,67 +106,40 @@ select:focus {
 /* ========== 按鈕 ========== */
 button {
   width: 100%;
-  padding: 14px;
-  margin-top: 12px;
-
-  border-radius: 12px;
-  border: none;
-
+  padding: 15px;
   background: linear-gradient(135deg, #28a745, #3ddc84);
   color: white;
-
-  font-size: 15px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
   font-weight: bold;
-
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: 0.25s ease;
 }
 
-button:active {
-  transform: scale(0.97);
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
 
-/* ========== 隱藏 ========== */
+button:disabled {
+  background: #b5b5b5;
+  cursor: not-allowed;
+}
+
+/* 隱藏 */
 .hidden {
   display: none;
 }
 
-/* ========== 成功頁 ========== */
+/* 成功畫面 */
 .success {
   text-align: center;
   padding: 40px;
   animation: fadeIn 0.4s ease;
 }
 
-.success p {
-  background: #f9fafb;
-  padding: 10px 12px;
-  border-radius: 10px;
-  margin: 6px 0;
-  text-align: left;
-}
-
-/* 動畫 */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* ========== 手機優化 ========== */
-@media (max-width: 480px) {
-
-  header {
-    font-size: 16px;
-    padding: 14px;
-  }
-
-  .container {
-    padding: 12px;
-  }
-
-  .service,
-  .time {
-    font-size: 16px;
-    padding: 14px;
-  }
 }
