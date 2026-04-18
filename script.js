@@ -1,23 +1,24 @@
-let selectedService = localStorage.getItem("service") || "";
+let selectedService = "";
 let selectedTime = "";
 
-/* ========== 選服務 ========== */
+/* Step 1 → 顯示 Step 2 */
 function selectService(el) {
   document.querySelectorAll('.service').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
 
   selectedService = el.innerText;
-  localStorage.setItem("service", selectedService);
+
+  document.getElementById("step2").classList.remove("hidden");
 }
 
-/* ========== Step2 → Step3 ========== */
+/* Step 2 → Step 3 */
 function goToStep3() {
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const date = document.getElementById("date").value;
   const people = document.getElementById("people").value;
 
-  if (!selectedService) return alert("請選服務");
+  if (!selectedService) return alert("請先選服務");
   if (!name || !phone || !date || !people) {
     alert("請完整填寫資料");
     return;
@@ -36,7 +37,7 @@ function goToStep3() {
   window.location.href = "step3.html";
 }
 
-/* ========== 選時段 ========== */
+/* 選時段 */
 function selectTime(el) {
   document.querySelectorAll('.time').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
@@ -44,7 +45,7 @@ function selectTime(el) {
   selectedTime = el.innerText;
 }
 
-/* ========== 提交 ========== */
+/* 提交 */
 function submitBooking() {
   const temp = JSON.parse(localStorage.getItem("bookingTemp"));
 
