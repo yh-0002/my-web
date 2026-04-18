@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>訂位成功</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -22,24 +21,31 @@
 
     <br>
 
-    <a href="index.html">
-      <button>返回首頁</button>
-    </a>
+    <button onclick="location.href='index.html'">
+      返回首頁
+    </button>
   </div>
 
 </div>
 
 <script>
-  const data = JSON.parse(localStorage.getItem("booking"));
+  const raw = localStorage.getItem("booking");
 
-  if (data) {
+  if (!raw) {
+    document.getElementById("result").innerHTML = "<p>查無訂位資料</p>";
+  } else {
+    const data = JSON.parse(raw);
+
     document.getElementById("result").innerHTML = `
-      姓名：${data.name}<br>
-      電話：${data.phone}<br>
-      服務：${data.service}<br>
-      人數：${data.people}<br>
-      日期：${data.date}<br>
-      時間：${data.time}
+      <div class="info">
+        <div>📌 訂位編號：${data.id}</div>
+        <div>👤 姓名：${data.name}</div>
+        <div>📞 電話：${data.phone}</div>
+        <div>🍽️ 服務：${data.service}</div>
+        <div>👥 人數：${data.people}</div>
+        <div>📅 日期：${data.date}</div>
+        <div>⏰ 時間：${data.time}</div>
+      </div>
     `;
   }
 </script>
