@@ -1,88 +1,128 @@
-
 let selectedService = "";
 let selectedTime = "";
 
-/* ========== 日期限制 ========== */
-const dateInput = document.getElementById("date");
-const today = new Date().toISOString().split("T")[0];
-dateInput.min = today;
+/* ===== 初始化 ===== */
+document.addEventListener("DOMContentLoaded", () => {
 
-/* ========== Step 控制 ========== */
-function showStep(id) {
-  document.getElementById(id).classList.remove("hidden");
+  // 日期限制
+  const dateInput = document.getElementById("date");
+  if (dateInput) {
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.min = today;
+  }
+
+  // time.html 防呆
+  if (location.pathname.includes("time.html")) {
+    const raw = localStorage.getItem("booking_temp");
+
+    if (!raw) {
+      alert("請先填寫資料");
+      location.href = "index.html";
+      return;
+    }
+
+    const data = JSON.parse(raw);
+    const title = document.getElementById("title");
+
+    if (title) {
+      title.innerText += `（${data.date}）`;
+    }
+  }
+
+  // success.html 顯示
+  if (location.pathname.includes("success.html")) {
+    const raw = localStorage.getItem("booking");
+    const box = document.getElementById("result");
+
+    if (!raw) {
+      box.innerHTML = "查無訂位資料";
+      return;
+    }
+
+    const data = JSON.parse(raw);
+
+    const fields = [
+      ["姓名", data.name],
+      ["電話", data.phone],
+      ["服務", data.service],
+      ["人數", data.people],
+      ["日期", data.date],
+      ["時間", data.time]
+    ];
+
+    fields.forEach(([k, v]) => {
+      const p = document.createElement("p");
+      p.textContent = `${k}：${v}`;
+      box.appendChild(p);
+    });
+
+    // 清掉單筆資料（避免刷新重複）
+    localStorage.removeItem("booking");
+  }
+});
+
+/* ===== Step1 ===== */
+function selectService(el) {
+  document.querySelectorAll(".service").forEach(s => s.classList.remove("active"));
+  el.classList.add("active");
+  selectedService = el.innerText;
+
+  document.getElementById("step2").classList.remove("hidden");
 }
 
-/* ========== Step2 → Step3（安全控制） ========== */
+/* ===== Step2 → Step3 ===== */
 function goToStep3() {
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value;
   const date = document.getElementById("date").value;
   const people = document.getElementById("people").value;
 
-  if (!name || !phone || !date || !people) {
-    alert("請完整填寫資料");
-    return;
-  }
+  if (!selectedService) return alert("請選擇服務");
+  if (!name || !phone || !date || !people) return alert("請填寫完整資料");
 
-const bookingData = {
-  name,
-  phone,
-  date,
-  people,
-  service: selectedService
-};
+  const data = {
+    name,
+    phone,
+    date,
+    people,
+    service: selectedService
+  };
 
-/* ========== 選服務 ========== */
-function selectService(el) {
-  document.querySelectorAll('.service').forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
+  localStorage.setItem("booking_temp", JSON.stringify(data));
 
-  selectedService = el.innerText;
-
-  showStep("step2");
+  location.href = "time.html";
 }
 
-/* ========== 選時段 ========== */
+/* ===== Step3 ===== */
 function selectTime(el) {
-  document.querySelectorAll('.time').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-
+  document.querySelectorAll(".time").forEach(t => t.classList.remove("active"));
+  el.classList.add("active");
   selectedTime = el.innerText;
 }
 
-/* ========== 電話清理 ========== */
-function cleanPhone(phone) {
-  return phone.replace(/[^0-9]/g, '').trim();
-}
-
-function validatePhone(phone) {
-  return /^09\d{8}$/.test(phone);
-}
-
-/* ========== 提交（導向成功頁） ========== */
 function submitBooking() {
-  let name = document.getElementById('name').value.trim();
-  let rawPhone = document.getElementById('phone').value;
-  let phone = cleanPhone(rawPhone);
-  let date = document.getElementById('date').value;
-  let people = document.getElementById('people').value;
+  const raw = localStorage.getItem("booking_temp");
+  if (!raw) {
+    alert("資料遺失");
+    location.href = "index.html";
+    return;
+  }
 
-  if (!selectedService) return alert("請選服務");
-  if (!selectedTime) return alert("請選時段");
-  if (name.length < 2) return alert("姓名至少2字");
-  if (!validatePhone(phone)) return alert("電話格式錯誤");
-  if (!date || !people) return alert("請完整填寫資料");
+  if (!selectedTime) {
+    alert("請選擇時段");
+    return;
+  }
 
-  const bookingData = {
-    name,
-    phone,
-    service: selectedService,
-    people,
-    date,
-    time: selectedTime
-  };
+  const data = JSON.parse(raw);
+  data.time = selectedTime;
 
-  localStorage.setItem("booking", JSON.stringify(bookingData));
+  localStorage.setItem("booking", JSON.stringify(data));
+  localStorage.removeItem("booking_temp");
 
-  window.location.href = "success.html";
+  location.href = "success.html";
+}
+
+/* ===== 返回首頁 ===== */
+function goHome() {
+  location.href = "index.html";
 }
