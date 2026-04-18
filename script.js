@@ -24,8 +24,13 @@ function goToStep3() {
     return;
   }
 
-  showStep("step3");
-}
+const bookingData = {
+  name,
+  phone,
+  date,
+  people,
+  service: selectedService
+};
 
 /* ========== 選服務 ========== */
 function selectService(el) {
