@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>選擇時段</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>Smart-Reserve</header>
+<header>Smart-Reserve 預約系統</header>
 
 <div class="container">
 
@@ -35,7 +36,42 @@
 
 </div>
 
-<script src="script.js"></script>
+<script>
+let selectedTime = "";
+
+/* 選時段 */
+function selectTime(el) {
+  document.querySelectorAll('.time').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  selectedTime = el.innerText;
+}
+
+/* 提交 */
+function submitBooking() {
+  const temp = JSON.parse(localStorage.getItem("tempBooking"));
+
+  if (!temp) {
+    alert("資料遺失，請重新填寫");
+    window.location.href = "index.html";
+    return;
+  }
+
+  if (!selectedTime) {
+    alert("請選擇時段");
+    return;
+  }
+
+  const finalData = {
+    ...temp,
+    time: selectedTime
+  };
+
+  localStorage.setItem("booking", JSON.stringify(finalData));
+  localStorage.removeItem("tempBooking");
+
+  window.location.href = "success.html";
+}
+</script>
 
 </body>
 </html>
