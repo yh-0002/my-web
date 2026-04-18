@@ -11,13 +11,13 @@ body {
 header {
   background: linear-gradient(135deg, #007BFF, #0056d2);
   color: white;
-  padding: 16px;
+  padding: 18px;
   text-align: center;
   font-size: 18px;
   font-weight: 700;
 }
 
-/* 容器（🔥 手機修正重點） */
+/* 容器 */
 .container {
   padding: 14px;
   max-width: 520px;
@@ -32,6 +32,12 @@ header {
   margin-bottom: 14px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   transform: translateZ(0);
+  transition: 0.2s ease;
+}
+
+/* hover（電腦） */
+.card:hover {
+  transform: translateY(-2px);
 }
 
 /* 標題 */
@@ -58,7 +64,15 @@ select {
   background: #f9fafb;
 }
 
-/* ========== 服務 ========== */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #007BFF;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+}
+
+/* ========== 服務選擇 ========== */
 .service {
   padding: 12px;
   margin: 8px 0;
@@ -67,45 +81,67 @@ select {
   text-align: center;
   cursor: pointer;
   font-weight: 500;
+  transition: 0.2s ease;
 }
 
-/* ========== 🔥 Step3 修正（重點） ========== */
+.service:hover {
+  background: #e9ecef;
+}
+
+.service:active {
+  transform: scale(0.97);
+}
+
+.service.active {
+  background: linear-gradient(135deg, #007BFF, #4aa3ff);
+  color: white;
+}
+
+/* ========== Step 3（🔥 完整重做） ========== */
 .time-slot {
-  display: grid;
-
-  /* 🔥 關鍵：小手機 2欄，大手機 3欄 */
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
 }
 
-/* 375px以上才變3欄 */
-@media (min-width: 400px) {
-  .time-slot {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* 時段統一尺寸 */
+/* 🔥 App 等級大按鈕 */
 .time {
-  height: 50px;
+  height: 66px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 10px;
+  border-radius: 16px;
+
   background: #f3f4f6;
 
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
 
   cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* hover */
+.time:hover {
+  background: #e9ecef;
+}
+
+/* 點擊 */
+.time:active {
+  transform: scale(0.97);
 }
 
 /* 選中 */
 .time.active {
   background: linear-gradient(135deg, #28a745, #48d368);
   color: white;
+  box-shadow: 0 8px 18px rgba(40,167,69,0.25);
 }
 
 /* ========== 按鈕 ========== */
@@ -119,23 +155,58 @@ button {
 
   background: linear-gradient(135deg, #28a745, #3ddc84);
   color: white;
+
   font-size: 15px;
   font-weight: bold;
+
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
-/* ========== 手機極小螢幕優化 ========== */
-@media (max-width: 360px) {
+button:active {
+  transform: scale(0.97);
+}
 
-  .time-slot {
-    grid-template-columns: repeat(2, 1fr);
+/* ========== 隱藏 ========== */
+.hidden {
+  display: none;
+}
+
+/* ========== 成功頁 ========== */
+.success {
+  text-align: center;
+  padding: 40px;
+  animation: fadeIn 0.4s ease;
+}
+
+.success p {
+  background: #f9fafb;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin: 6px 0;
+  text-align: left;
+}
+
+/* 動畫 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== 手機優化 ========== */
+@media (max-width: 480px) {
+
+  header {
+    font-size: 16px;
+    padding: 14px;
   }
 
   .time {
-    height: 46px;
-    font-size: 13px;
+    height: 70px;
+    font-size: 19px;
   }
 
   .container {
-    padding: 10px;
+    padding: 12px;
   }
 }
