@@ -1,30 +1,43 @@
 let selectedService = "";
-let selectedTime = "";
 
-/* Step 1 → 顯示 Step 2 */
+/* 日期限制 */
+window.addEventListener("DOMContentLoaded", () => {
+  const dateInput = document.getElementById("date");
+  const today = new Date().toISOString().split("T")[0];
+  dateInput.min = today;
+});
+
+/* 顯示 step */
+function showStep(id) {
+  document.querySelectorAll(".card").forEach(card => {
+    card.classList.add("hidden");
+  });
+  document.getElementById(id).classList.remove("hidden");
+}
+
+/* 選服務 */
 function selectService(el) {
   document.querySelectorAll('.service').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
 
   selectedService = el.innerText;
 
-  document.getElementById("step2").classList.remove("hidden");
+  showStep("step2");
 }
 
-/* Step 2 → Step 3 */
+/* 前往 Step3（跳頁） */
 function goToStep3() {
   const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
+  const phone = document.getElementById("phone").value;
   const date = document.getElementById("date").value;
   const people = document.getElementById("people").value;
 
-  if (!selectedService) return alert("請先選服務");
   if (!name || !phone || !date || !people) {
     alert("請完整填寫資料");
     return;
   }
 
-  const temp = {
+  const bookingData = {
     name,
     phone,
     date,
@@ -32,33 +45,7 @@ function goToStep3() {
     service: selectedService
   };
 
-  localStorage.setItem("bookingTemp", JSON.stringify(temp));
+  localStorage.setItem("tempBooking", JSON.stringify(bookingData));
 
-  window.location.href = "step3.html";
-}
-
-/* 選時段 */
-function selectTime(el) {
-  document.querySelectorAll('.time').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-
-  selectedTime = el.innerText;
-}
-
-/* 提交 */
-function submitBooking() {
-  const temp = JSON.parse(localStorage.getItem("bookingTemp"));
-
-  if (!temp) return alert("資料遺失，請重新填寫");
-  if (!selectedTime) return alert("請選時段");
-
-  const booking = {
-    ...temp,
-    time: selectedTime,
-    id: "SR" + Date.now()
-  };
-
-  localStorage.setItem("booking", JSON.stringify(booking));
-
-  window.location.href = "success.html";
+  window.location.href = "time.html";
 }
