@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>選擇時段</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>Step 3：選擇時段</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2 id="title">選擇用餐時間</h2>
+
+    <div class="time-slot">
+      <div class="time" onclick="selectTime(this)">11:00</div>
+      <div class="time" onclick="selectTime(this)">12:00</div>
+      <div class="time" onclick="selectTime(this)">13:00</div>
+      <div class="time" onclick="selectTime(this)">18:00</div>
+      <div class="time" onclick="selectTime(this)">19:00</div>
+      <div class="time" onclick="selectTime(this)">20:00</div>
+    </div>
+
+    <button onclick="submitBooking()">確認訂位</button>
+  </div>
+
+</div>
+
+<script>
+let selectedTime = "";
+
+// 防止直接進來
+const raw = localStorage.getItem("booking_temp");
+if (!raw) {
+  alert("請先填資料");
+  location.href = "index.html";
+}
+
+// 顯示日期（加分）
+const data = JSON.parse(raw);
+document.getElementById("title").innerText += `（${data.date}）`;
+
+// 選時間
+function selectTime(el) {
+  document.querySelectorAll(".time").forEach(t => t.classList.remove("active"));
+  el.classList.add("active");
+  selectedTime = el.innerText;
+}
+
+// 送出
+function submitBooking() {
+  if (!selectedTime) {
+    alert("請選時段");
+    return;
+  }
+
+  const data = JSON.parse(localStorage.getItem("booking_temp"));
+  data.time = selectedTime;
+
+  localStorage.setItem("booking", JSON.stringify(data));
+  localStorage.removeItem("booking_temp");
+
+  location.href = "success.html";
+}
+</script>
+
+</body>
+</html>
