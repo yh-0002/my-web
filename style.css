@@ -4,53 +4,40 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   background: linear-gradient(135deg, #eef2f7, #f8fafc);
   color: #222;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* Header */
 header {
   background: linear-gradient(135deg, #007BFF, #0056d2);
   color: white;
-  padding: 20px;
+  padding: 16px;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: 0.5px;
 }
 
-/* 容器 */
+/* 容器（🔥 手機修正重點） */
 .container {
-  padding: 16px;
+  padding: 14px;
   max-width: 520px;
   margin: auto;
 }
 
-/* 卡片（🔥 已修電腦 hover bug） */
+/* 卡片 */
 .card {
   background: white;
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-
-  transition: transform 0.25s ease;
-  transform: translateZ(0); /* 🔥 修電腦 click bug */
-  will-change: transform;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-}
-
-/* Step1 保護層級（🔥 點不到問題核心修正） */
-#step1 {
-  position: relative;
-  z-index: 10;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transform: translateZ(0);
 }
 
 /* 標題 */
 h2 {
   margin-top: 0;
-  font-size: 18px;
+  font-size: 16px;
   color: #333;
 }
 
@@ -60,174 +47,95 @@ select {
   width: 100%;
   box-sizing: border-box;
 
-  height: 48px;
+  height: 46px;
   padding: 0 12px;
-  margin: 10px 0;
+  margin: 8px 0;
 
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid #e5e7eb;
 
-  font-size: 16px;
+  font-size: 15px;
   background: #f9fafb;
-
-  -webkit-appearance: none;
-  appearance: none;
 }
 
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #007BFF;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
-}
-
-/* ========== 服務選擇 ========== */
+/* ========== 服務 ========== */
 .service {
-  padding: 14px;
+  padding: 12px;
   margin: 8px 0;
   background: #f3f4f6;
-  border-radius: 12px;
+  border-radius: 10px;
   text-align: center;
   cursor: pointer;
   font-weight: 500;
-  transition: 0.2s ease;
-
-  position: relative;
-  z-index: 1;
-
-  -webkit-tap-highlight-color: transparent;
 }
 
-.service:hover {
-  background: #e9ecef;
-}
-
-.service:active {
-  transform: scale(0.97);
-}
-
-.service.active {
-  background: linear-gradient(135deg, #007BFF, #4aa3ff);
-  color: white;
-  box-shadow: 0 6px 14px rgba(0,123,255,0.25);
-}
-
-/* ========== Step 3 時段 ========== */
+/* ========== 🔥 Step3 修正（重點） ========== */
 .time-slot {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  /* 🔥 關鍵：小手機 2欄，大手機 3欄 */
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
-/* 統一尺寸（🔥 完全修復手機/電腦不一致） */
+/* 375px以上才變3欄 */
+@media (min-width: 400px) {
+  .time-slot {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 時段統一尺寸 */
 .time {
-  height: 52px;
+  height: 50px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 12px;
+  border-radius: 10px;
   background: #f3f4f6;
 
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 
   cursor: pointer;
-  transition: 0.2s ease;
-
-  -webkit-tap-highlight-color: transparent;
 }
 
-.time:hover {
-  background: #e9ecef;
-}
-
-.time:active {
-  transform: scale(0.96);
-}
-
+/* 選中 */
 .time.active {
   background: linear-gradient(135deg, #28a745, #48d368);
   color: white;
-  font-weight: 600;
-  box-shadow: 0 6px 14px rgba(40,167,69,0.25);
 }
 
 /* ========== 按鈕 ========== */
 button {
   width: 100%;
-  padding: 15px;
+  padding: 14px;
   margin-top: 12px;
+
+  border-radius: 12px;
+  border: none;
 
   background: linear-gradient(135deg, #28a745, #3ddc84);
   color: white;
-
-  border: none;
-  border-radius: 14px;
-
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
-
-  cursor: pointer;
-  transition: 0.25s ease;
 }
 
-button:hover {
-  transform: translateY(-2px);
-}
-
-button:active {
-  transform: scale(0.97);
-}
-
-button:disabled {
-  background: #b5b5b5;
-  cursor: not-allowed;
-}
-
-/* ========== 隱藏 ========== */
-.hidden {
-  display: none;
-}
-
-/* ========== 成功頁 ========== */
-.success {
-  text-align: center;
-  padding: 40px;
-  animation: fadeIn 0.4s ease;
-}
-
-.success p {
-  background: #f9fafb;
-  padding: 10px 12px;
-  border-radius: 10px;
-  margin: 6px 0;
-  text-align: left;
-}
-
-/* 動畫 */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ========== 手機優化 ========== */
-@media (max-width: 480px) {
-
-  header {
-    font-size: 18px;
-    padding: 16px;
-  }
+/* ========== 手機極小螢幕優化 ========== */
+@media (max-width: 360px) {
 
   .time-slot {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .time {
-    height: 48px;
-    font-size: 14px;
+    height: 46px;
+    font-size: 13px;
+  }
+
+  .container {
+    padding: 10px;
   }
 }
