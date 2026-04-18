@@ -1,7 +1,7 @@
 let selectedService = localStorage.getItem("service") || "";
 let selectedTime = "";
 
-/* ========== Step 1 → Step 2 ========== */
+/* ========== 選服務 ========== */
 function selectService(el) {
   document.querySelectorAll('.service').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
@@ -10,7 +10,7 @@ function selectService(el) {
   localStorage.setItem("service", selectedService);
 }
 
-/* ========== 下一步（跳 Step 3 頁） ========== */
+/* ========== Step2 → Step3 ========== */
 function goToStep3() {
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
@@ -23,7 +23,7 @@ function goToStep3() {
     return;
   }
 
-  const bookingTemp = {
+  const temp = {
     name,
     phone,
     date,
@@ -31,7 +31,7 @@ function goToStep3() {
     service: selectedService
   };
 
-  localStorage.setItem("bookingTemp", JSON.stringify(bookingTemp));
+  localStorage.setItem("bookingTemp", JSON.stringify(temp));
 
   window.location.href = "step3.html";
 }
@@ -51,13 +51,13 @@ function submitBooking() {
   if (!temp) return alert("資料遺失，請重新填寫");
   if (!selectedTime) return alert("請選時段");
 
-  const bookingData = {
+  const booking = {
     ...temp,
     time: selectedTime,
     id: "SR" + Date.now()
   };
 
-  localStorage.setItem("booking", JSON.stringify(bookingData));
+  localStorage.setItem("booking", JSON.stringify(booking));
 
   window.location.href = "success.html";
 }
