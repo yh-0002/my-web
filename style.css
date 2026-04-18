@@ -35,7 +35,6 @@ header {
   transition: 0.2s ease;
 }
 
-/* hover（電腦） */
 .card:hover {
   transform: translateY(-2px);
 }
@@ -72,15 +71,19 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
 }
 
-/* ========== 服務選擇 ========== */
+/* ========== Step1 服務 ========== */
 .service {
-  padding: 12px;
+  padding: 14px;
   margin: 8px 0;
+
   background: #f3f4f6;
-  border-radius: 10px;
+  border-radius: 12px;
+
   text-align: center;
-  cursor: pointer;
+  font-size: 16px;
   font-weight: 500;
+
+  cursor: pointer;
   transition: 0.2s ease;
 }
 
@@ -97,32 +100,27 @@ select:focus {
   color: white;
 }
 
-/* ========== Step 3（🔥 完整重做） ========== */
+/* ========== Step3（🔥 完全對齊 Step1） ========== */
+
 .time-slot {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: block;
   margin-top: 10px;
 }
 
-/* 🔥 App 等級大按鈕 */
+/* 🔥 跟 Step1 完全一致 */
 .time {
-  height: 66px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 16px;
+  padding: 14px;
+  margin: 8px 0;
 
   background: #f3f4f6;
+  border-radius: 12px;
 
-  font-size: 18px;
-  font-weight: 600;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
 
   cursor: pointer;
-
-  transition: all 0.2s ease;
+  transition: 0.2s ease;
 
   -webkit-tap-highlight-color: transparent;
 }
@@ -132,16 +130,16 @@ select:focus {
   background: #e9ecef;
 }
 
-/* 點擊 */
+/* click */
 .time:active {
   transform: scale(0.97);
 }
 
-/* 選中 */
+/* selected */
 .time.active {
   background: linear-gradient(135deg, #28a745, #48d368);
   color: white;
-  box-shadow: 0 8px 18px rgba(40,167,69,0.25);
+  box-shadow: 0 6px 14px rgba(40,167,69,0.25);
 }
 
 /* ========== 按鈕 ========== */
@@ -201,12 +199,13 @@ button:active {
     padding: 14px;
   }
 
-  .time {
-    height: 70px;
-    font-size: 19px;
-  }
-
   .container {
     padding: 12px;
+  }
+
+  .service,
+  .time {
+    font-size: 16px;
+    padding: 14px;
   }
 }
